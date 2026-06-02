@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  DASHBOARD VIEW — Skeleton (50%)
+  Kamu perlu tambahkan konten ringkasan stok kritis di sini.
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dailydose.controller.DashboardController"
+            prefWidth="900" prefHeight="600">
+
+    <!-- ===== TOP: MenuBar ===== -->
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Logout" onAction="#handleLogout"/>
+                    <MenuItem text="Keluar" onAction="#handleKeluar"/>
+                </Menu>
+                <Menu text="Data">
+                    <MenuItem text="Manajemen Barang" onAction="#bukaInventory"/>
+                    <MenuItem text="Manajemen User"   onAction="#bukaManajemenUser"/>
+                </Menu>
+                <Menu text="Transaksi">
+                    <MenuItem text="Transaksi Kasir (Jual)" onAction="#bukaKasir"/>
+                    <MenuItem text="Transaksi Pembelian (Restock)" onAction="#bukaPembelian"/>
+                </Menu>
+                <Menu text="Laporan">
+                    <MenuItem text="Riwayat Penjualan" onAction="#bukaRiwayat"/>
+                    <MenuItem text="Riwayat Pembelian" onAction="#bukaRiwayatPembelian"/>
+                </Menu>
+            </MenuBar>
+        </VBox>
+    </top>
+
+    <!-- ===== CENTER: Konten Dashboard ===== -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;">
+
+            <Label fx:id="lblSambutan"
+                   text="Selamat Datang!"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <Separator/>
+
+            <Label text="Ringkasan Stok"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <!-- TODO: Isi dengan data stok kritis dari database -->
+            <Label fx:id="lblStokKritis"
+                   text="Memuat data..."
+                   style="-fx-text-fill: #e74c3c; -fx-font-size: 13px;"/>
+
+            <Separator/>
+
+            <Label text="Ringkasan Keuntungan"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <Label fx:id="lblKeuntungan"
+                   text="Memuat data..."
+                   style="-fx-text-fill: #27ae60; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>

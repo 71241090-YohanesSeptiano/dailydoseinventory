@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!--
+  LOGIN VIEW
+  File ini adalah bagian VIEW dari MVC.
+  fx:controller menghubungkan file ini ke LoginController.java
+  fx:id menghubungkan komponen ke variabel @FXML di Controller.
+-->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dailydose.controller.LoginController"
+      alignment="CENTER"
+      spacing="15"
+      style="-fx-background-color: #f0f4f8;"
+      prefWidth="400" prefHeight="350">
+
+    <padding>
+        <Insets top="40" right="60" bottom="40" left="60"/>
+    </padding>
+
+    <!-- Judul Aplikasi -->
+    <Label text="DailyDose Inventory"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <Separator/>
+
+    <Label text="LOG IN"
+           style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+
+    <!-- Form Username -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Username:" prefWidth="80"/>
+        <TextField fx:id="txtUsername" promptText="Masukkan username" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Form Password -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Password:" prefWidth="80"/>
+        <PasswordField fx:id="txtPassword" promptText="Masukkan password" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Pesan Error / Sukses -->
+    <Label fx:id="lblPesan" text="" wrapText="true"
+           style="-fx-font-size: 11px;"/>
+
+    <!-- Tombol Login -->
+    <Button fx:id="btnLogin"
+            text="LOGIN"
+            onAction="#handleLogin"
+            prefWidth="200"
+            style="-fx-background-color: #2980b9; -fx-text-fill: white;
+                   -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+</VBox>
