@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  USER MANAGEMENT VIEW
+  Hanya bisa diakses oleh Admin.
+  fx:controller menghubungkan ke UserController.java
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dailydose.controller.UserController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #f0f4f8;">
+
+    <!-- ===== TOP: Header ===== -->
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 12 20;"
+              alignment="CENTER_LEFT" spacing="15">
+            <Button text="← Dashboard" onAction="#kembaliDashboard"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-cursor: hand; -fx-font-size: 12px;"/>
+            <Label text="👥 Manajemen User"
+                   style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== CENTER: Form + Tabel ===== -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 15;">
+
+            <!-- FORM INPUT -->
+            <VBox style="-fx-background-color: white; -fx-padding: 15;
+                         -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,#ccc,4,0,0,2);">
+
+                <Label text="Form Data User"
+                       style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 0 0 8 0;"/>
+
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="120"/>
+                        <ColumnConstraints prefWidth="250" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <!-- Row 0: Username -->
+                    <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtUsername" promptText="Masukkan username"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <!-- Row 1: Password -->
+                    <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtPassword" promptText="Masukkan password"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <!-- Row 2: Role -->
+                    <Label text="Role:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cmbRole" prefWidth="250"
+                              GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <!-- Pesan Error / Info -->
+                <Label fx:id="lblPesan" text="" wrapText="true"
+                       style="-fx-font-size: 11px; -fx-padding: 5 0 0 0;"/>
+
+                <!-- Tombol CRUD -->
+                <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                    <Button text="➕ Tambah" onAction="#handleTambah"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="✏️ Edit" onAction="#handleEdit"
+                            style="-fx-background-color: #f39c12; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="🗑️ Hapus" onAction="#handleHapus"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="🔄 Reset" onAction="#handleReset"
+                            style="-fx-background-color: #95a5a6; -fx-text-fill: white;
+                                   -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- TABEL USER -->
+            <TableView fx:id="tabelUser" VBox.vgrow="ALWAYS"
+                       onMouseClicked="#handlePilihBaris"
+                       style="-fx-background-radius: 8;">
+                <columns>
+                    <TableColumn fx:id="colId"       text="ID"       prefWidth="60"/>
+                    <TableColumn fx:id="colUsername"  text="Username" prefWidth="250"/>
+                    <TableColumn fx:id="colRole"     text="Role"     prefWidth="150"/>
+                </columns>
+                <placeholder>
+                    <Label text="Belum ada data user."/>
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>
