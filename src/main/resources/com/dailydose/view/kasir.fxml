@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  KASIR (PENJUALAN) VIEW
+  Untuk memproses transaksi penjualan ke pelanggan.
+  Stok barang akan otomatis berkurang setelah transaksi diproses.
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dailydose.controller.KasirController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #f0f4f8;">
+
+    <!-- ===== TOP: Header ===== -->
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 12 20;"
+              alignment="CENTER_LEFT" spacing="15">
+            <Button text="← Dashboard" onAction="#kembaliDashboard"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-cursor: hand; -fx-font-size: 12px;"/>
+            <Label text="🛒 Transaksi Kasir (Penjualan)"
+                   style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== CENTER ===== -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 15;">
+
+            <!-- FORM: Pilih Barang + Input Jumlah -->
+            <VBox style="-fx-background-color: white; -fx-padding: 15;
+                         -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,#ccc,4,0,0,2);">
+
+                <Label text="Tambah Item Penjualan"
+                       style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 0 0 8 0;"/>
+
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="120"/>
+                        <ColumnConstraints prefWidth="250" hgrow="ALWAYS"/>
+                        <ColumnConstraints prefWidth="100"/>
+                        <ColumnConstraints prefWidth="150" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Pilih Barang:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cmbBarang" prefWidth="250"
+                              GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Stok Tersedia:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <Label fx:id="lblStokTersedia" text="-"
+                           style="-fx-font-weight: bold;"
+                           GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                    <Label text="Jumlah Jual:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtJumlah" promptText="Contoh: 2"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Harga Jual/pcs:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <Label fx:id="lblHargaJual" text="-"
+                           style="-fx-font-weight: bold; -fx-text-fill: #27ae60;"
+                           GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                </GridPane>
+
+                <!-- Pesan -->
+                <Label fx:id="lblPesan" text="" wrapText="true"
+                       style="-fx-font-size: 11px; -fx-padding: 5 0 0 0;"/>
+
+                <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                    <Button text="➕ Tambah ke Keranjang" onAction="#handleTambahKeKeranjang"
+                            style="-fx-background-color: #2980b9; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="🗑️ Hapus Item" onAction="#handleHapusItem"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white;
+                                   -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- TABEL KERANJANG BELANJA -->
+            <TableView fx:id="tabelKeranjang" VBox.vgrow="ALWAYS"
+                       style="-fx-background-radius: 8;">
+                <columns>
+                    <TableColumn fx:id="colIdBarang"   text="ID Barang"  prefWidth="100"/>
+                    <TableColumn fx:id="colNamaBarang" text="Nama Barang" prefWidth="220"/>
+                    <TableColumn fx:id="colJumlah"     text="Jumlah"     prefWidth="80"/>
+                    <TableColumn fx:id="colHarga"      text="Harga"      prefWidth="120"/>
+                    <TableColumn fx:id="colSubtotal"   text="Subtotal"   prefWidth="140"/>
+                </columns>
+                <placeholder>
+                    <Label text="Keranjang kosong. Tambahkan item di atas."/>
+                </placeholder>
+            </TableView>
+
+            <!-- FOOTER: Total + Proses -->
+            <HBox alignment="CENTER_RIGHT" spacing="15"
+                  style="-fx-background-color: white; -fx-padding: 12 20;
+                         -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,#ccc,4,0,0,2);">
+                <Label text="Total Bayar:"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <Label fx:id="lblTotal" text="Rp 0"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <Button text="✅ Proses Penjualan" onAction="#handleProses"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                               -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;
+                               -fx-padding: 8 20;"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
