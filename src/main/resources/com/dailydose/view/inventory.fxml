@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dailydose.controller.InventoryController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #f0f4f8;">
+
+    <!-- ===== TOP: Header + Tombol Kembali ===== -->
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 12 20;"
+              alignment="CENTER_LEFT" spacing="15">
+            <Button text="← Dashboard" onAction="#kembaliDashboard"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-cursor: hand; -fx-font-size: 12px;"/>
+            <Label text="📦 Manajemen Data Barang"
+                   style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== CENTER: Form + Tabel ===== -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 15;">
+
+            <!-- FORM INPUT -->
+            <VBox style="-fx-background-color: white; -fx-padding: 15;
+                         -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,#ccc,4,0,0,2);">
+
+                <Label text="Form Data Barang"
+                       style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 0 0 8 0;"/>
+
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="120"/>
+                        <ColumnConstraints prefWidth="200" hgrow="ALWAYS"/>
+                        <ColumnConstraints prefWidth="120"/>
+                        <ColumnConstraints prefWidth="200" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <!-- Row 0: ID Barang & Nama Barang -->
+                    <Label text="ID Barang:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtIdBarang" promptText="Contoh: B001"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Nama Barang:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <TextField fx:id="txtNamaBarang" promptText="Nama barang"
+                               GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                    <!-- Row 1: Harga Jual & Harga Beli -->
+                    <Label text="Harga Jual:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtHarga" promptText="Contoh: 15000"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Modal (Beli):" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <TextField fx:id="txtHargaBeli" promptText="Contoh: 10000"
+                               GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                    <!-- Row 2: Kolom spesifik & Kategori -->
+                    <Label text="Kategori:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cmbKategori"
+                              GridPane.rowIndex="2" GridPane.columnIndex="1"
+                              maxWidth="200"
+                              onAction="#handleKategoriChange"/>
+
+                    <Label fx:id="lblSpesifik" text="Material:"
+                           GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                    <TextField fx:id="txtSpesifik" promptText="Contoh: Kaca"
+                               GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                </GridPane>
+
+                <!-- Pesan Error / Info -->
+                <Label fx:id="lblPesan" text="" wrapText="true"
+                       style="-fx-font-size: 11px; -fx-padding: 5 0 0 0;"/>
+
+                <!-- Tombol CRUD -->
+                <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                    <Button text="➕ Tambah" onAction="#handleTambah"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="✏️ Edit" onAction="#handleEdit"
+                            style="-fx-background-color: #f39c12; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="🗑️ Hapus" onAction="#handleHapus"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Button text="🔄 Reset Form" onAction="#handleReset"
+                            style="-fx-background-color: #95a5a6; -fx-text-fill: white;
+                                   -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- SEARCH BAR -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="🔍 Cari:"/>
+                <TextField fx:id="txtCari" promptText="Cari nama atau ID barang..."
+                           prefWidth="300" onKeyReleased="#handleCari"/>
+                <Button text="Tampilkan Semua" onAction="#handleTampilSemua"
+                        style="-fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- TABEL BARANG -->
+            <TableView fx:id="tabelBarang" VBox.vgrow="ALWAYS"
+                       onMouseClicked="#handlePilihBaris"
+                       style="-fx-background-radius: 8;">
+                <columns>
+                    <TableColumn fx:id="colId"       text="ID"         prefWidth="80"/>
+                    <TableColumn fx:id="colNama"     text="Nama Barang" prefWidth="180"/>
+                    <TableColumn fx:id="colKategori" text="Kategori"   prefWidth="100"/>
+                    <TableColumn fx:id="colHarga"    text="Harga Jual" prefWidth="100"/>
+                    <TableColumn fx:id="colHargaBeli" text="Modal"     prefWidth="100"/>
+                    <TableColumn fx:id="colStok"     text="Stok"       prefWidth="70"/>
+                    <TableColumn fx:id="colSpesifik" text="Ket. Khusus" prefWidth="140"/>
+                </columns>
+                <placeholder>
+                    <Label text="Belum ada data barang."/>
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>
