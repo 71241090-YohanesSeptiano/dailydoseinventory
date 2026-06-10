@@ -31,32 +31,28 @@ import java.util.ResourceBundle;
  */
 public class RiwayatController implements Initializable {
 
-    // =========================================================
-    //  INJECT komponen FXML
-    // =========================================================
-    @FXML private TableView<Penjualan>               tabelPenjualan;
-    @FXML private TableColumn<Penjualan, String>     colIdTransaksi;
-    @FXML private TableColumn<Penjualan, String>     colTanggal;
-    @FXML private TableColumn<Penjualan, Double>     colTotal;
-    @FXML private TableColumn<Penjualan, Double>     colTotalKeuntungan;
-    @FXML private TableColumn<Penjualan, Integer>    colIdUser;
+    // INJECT komponen FXML
+    @FXML private TableView<Penjualan> tabelPenjualan;
+    @FXML private TableColumn<Penjualan, String> colIdTransaksi;
+    @FXML private TableColumn<Penjualan, String> colTanggal;
+    @FXML private TableColumn<Penjualan, Double> colTotal;
+    @FXML private TableColumn<Penjualan, Double> colTotalKeuntungan;
+    @FXML private TableColumn<Penjualan, Integer> colIdUser;
 
-    @FXML private Label                               lblDetailHeader;
-    @FXML private TableView<DetailPenjualan>          tabelDetail;
-    @FXML private TableColumn<DetailPenjualan, String>  colDetailBarang;
-    @FXML private TableColumn<DetailPenjualan, String>  colDetailNama;
+    @FXML private Label lblDetailHeader;
+    @FXML private TableView<DetailPenjualan> tabelDetail;
+    @FXML private TableColumn<DetailPenjualan, String> colDetailBarang;
+    @FXML private TableColumn<DetailPenjualan, String> colDetailNama;
     @FXML private TableColumn<DetailPenjualan, Integer> colDetailJumlah;
-    @FXML private TableColumn<DetailPenjualan, Double>  colDetailSubtotal;
-    @FXML private TableColumn<DetailPenjualan, Double>  colDetailKeuntungan;
+    @FXML private TableColumn<DetailPenjualan, Double> colDetailSubtotal;
+    @FXML private TableColumn<DetailPenjualan, Double> colDetailKeuntungan;
 
     private final PenjualanDAO penjualanDAO = new PenjualanDAO();
 
-    private ObservableList<Penjualan>       dataPenjualan = FXCollections.observableArrayList();
-    private ObservableList<DetailPenjualan> dataDetail    = FXCollections.observableArrayList();
+    private ObservableList<Penjualan> dataPenjualan = FXCollections.observableArrayList();
+    private ObservableList<DetailPenjualan> dataDetail = FXCollections.observableArrayList();
 
-    // =========================================================
-    //  INITIALIZE
-    // =========================================================
+    // INITIALIZE
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Setup kolom tabel header penjualan
@@ -119,17 +115,13 @@ public class RiwayatController implements Initializable {
         muatRiwayat();
     }
 
-    // =========================================================
-    //  LOAD riwayat dari database
-    // =========================================================
+    // LOAD riwayat dari database
     private void muatRiwayat() {
         dataPenjualan.clear();
         dataPenjualan.addAll(penjualanDAO.getAllPenjualan());
     }
 
-    // =========================================================
-    //  KLIK transaksi → tampilkan detail item
-    // =========================================================
+    // KLIK transaksi → tampilkan detail item
     @FXML
     private void handlePilihTransaksi() {
         Penjualan dipilih = tabelPenjualan.getSelectionModel().getSelectedItem();
@@ -145,9 +137,7 @@ public class RiwayatController implements Initializable {
         dataDetail.addAll(details);
     }
 
-    // =========================================================
-    //  KEMBALI ke Dashboard
-    // =========================================================
+    // Balik ke Dashboard
     @FXML
     private void kembaliDashboard() {
         try {

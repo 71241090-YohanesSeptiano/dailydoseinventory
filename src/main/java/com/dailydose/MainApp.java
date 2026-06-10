@@ -18,16 +18,16 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // 1. Inisialisasi database (buat file .db + semua tabel jika belum ada)
+        // Inisialisasi database (buat file .db + semua tabel jika belum ada)
         DatabaseHelper.getInstance();
 
-        // 2. Load halaman Login dari FXML
+        // Load halaman Login dari FXML
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("/com/dailydose/view/login.fxml")
         );
         Parent root = loader.load();
 
-        // 3. Tampilkan window
+        // Tampilkan window
         primaryStage.setTitle("DailyDose Inventory — Login");
         primaryStage.setScene(new Scene(root, 450, 350));
         primaryStage.setResizable(false);

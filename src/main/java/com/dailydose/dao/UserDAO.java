@@ -15,7 +15,6 @@ import java.util.List;
  * Controller tidak boleh nulis SQL sendiri — harus lewat DAO ini!
  */
 public class UserDAO {
-
     private final Connection conn;
 
     public UserDAO() {
@@ -23,9 +22,7 @@ public class UserDAO {
         this.conn = DatabaseHelper.getInstance().getConnection();
     }
 
-    // =========================================================
-    //  CREATE — Tambah user baru
-    // =========================================================
+    // CREATE — Tambah user baru
     public boolean tambahUser(User user) {
         String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -40,9 +37,7 @@ public class UserDAO {
         }
     }
 
-    // =========================================================
-    //  READ — Ambil semua user
-    // =========================================================
+    // READ — Ambil semua user
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM users";
@@ -57,9 +52,7 @@ public class UserDAO {
         return list;
     }
 
-    // =========================================================
-    //  LOGIN — Cari user berdasarkan username & password
-    // =========================================================
+    // LOGIN — Cari user berdasarkan username & password
     public User login(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -76,9 +69,7 @@ public class UserDAO {
         return null;
     }
 
-    // =========================================================
-    //  UPDATE — Edit data user
-    // =========================================================
+    // UPDATE — Edit data user
     public boolean updateUser(User user) {
         String sql = "UPDATE users SET username=?, password=?, role=? WHERE id_user=?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -94,9 +85,7 @@ public class UserDAO {
         }
     }
 
-    // =========================================================
-    //  DELETE — Hapus user
-    // =========================================================
+    // DELETE — Hapus user
     public boolean deleteUser(int idUser) {
         String sql = "DELETE FROM users WHERE id_user = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -109,9 +98,7 @@ public class UserDAO {
         }
     }
 
-    // =========================================================
-    //  HELPER — Konversi ResultSet → User object
-    // =========================================================
+    // HELPER — Konversi ResultSet → User object
     private User mapRowToUser(ResultSet rs) throws SQLException {
         return new User(
             rs.getInt("id_user"),
