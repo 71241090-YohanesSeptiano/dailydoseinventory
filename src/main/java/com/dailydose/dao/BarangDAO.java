@@ -202,7 +202,7 @@ public class BarangDAO {
         } catch (SQLException e) {
             System.err.println("❌ Gagal generate ID: " + e.getMessage());
         }
-        // Format ID baru, misal: B001, B002, B015
+        // Format Id baru, misal: B001, B002, B015
         return String.format("B%03d", maxId + 1);
     }
 

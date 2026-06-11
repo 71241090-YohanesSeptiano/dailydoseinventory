@@ -65,7 +65,7 @@ public class UserDAO {
         } catch (SQLException e) {
             System.err.println("❌ Gagal login: " + e.getMessage());
         }
-        // Return null jika tidak ditemukan → Controller akan tampilkan pesan error
+        // Return null jika tidak ditemukan trus Controller menampilkan pesan error
         return null;
     }
 
@@ -98,7 +98,7 @@ public class UserDAO {
         }
     }
 
-    // HELPER — Konversi ResultSet → User object
+    // HELPER — Konversi ResultSet ke User object
     private User mapRowToUser(ResultSet rs) throws SQLException {
         return new User(
             rs.getInt("id_user"),

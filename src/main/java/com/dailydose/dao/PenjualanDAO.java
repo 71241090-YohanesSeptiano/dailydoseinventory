@@ -127,7 +127,7 @@ public class PenjualanDAO {
     public List<DetailPenjualan> getDetailByTransaksi(String idTransaksi) {
         List<DetailPenjualan> list = new ArrayList<>();
         String sql = """
-            SELECT dp.*, b.nama_barang
+            SELECT dp.*, b.nama_barang, b.harga_beli
             FROM detail_penjualan dp
             JOIN barang b ON dp.id_barang = b.id_barang
             WHERE dp.id_transaksi = ?
